@@ -128,7 +128,7 @@ plt.show()
 ![pred_output](https://user-images.githubusercontent.com/24585799/34250830-1ff0b65a-e664-11e7-971b-e45a400f98a6.PNG)
 
 ## Reference-
-Please do Visit Great Explenation
+Please do visit Great Explanation
 - [WILDML](http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/) Tutorial 
 - [StatsBot](https://blog.statsbot.co/time-series-prediction-using-recurrent-neural-networks-lstms-807fa6ca7f) Blog
 - [Kimanalytics](https://github.com/kimanalytics/Recurrent-Neural-Network-to-Predict-Stock-Prices) for Code 
