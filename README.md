@@ -41,7 +41,7 @@ please do visit for proper explanation [Link](http://colah.github.io/posts/2015-
 
 ## Implementing LSTM
 **Importing Data**
-'''
+```
 #Importing the Libraries
 import numpy as np
 import matplotlib.pyplot as plt
@@ -58,9 +58,9 @@ training_set.head()
 #Converting into 2D array
 training_set = training_set.values
 training_set
-'''
+```
 **Scaling**
-'''
+```
 from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler()
 training_set = sc.fit_transform(training_set)
@@ -69,13 +69,15 @@ training_set
 
 X_train = training_set[0:897]
 Y_train = training_set[1:898]
-'''
+```
 **Reshaping for keras**
+```
 #Reshaping for Keras [reshape into 3 dimensions, [batch_size, timesteps, input_dim]
 X_train = np.reshape(X_train, (897, 1, 1))
 X_train
-
+```
 **RNN Layers**
+```
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
@@ -89,9 +91,31 @@ regressor.add(Dense(units = 1))
 regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
 #Fitting the Recurrent Neural Network [epoches is a kindoff number of iteration]
 regressor.fit(X_train, Y_train, batch_size = 32, epochs = 200)
+```
+**Making Prediction**
+```
+# Reading CSV file from test set
+test_set = pd.read_csv('Enter the name of file for testing_set')
+test_set.head()
+
+#selecting the second column from test data 
+real_btc_price = test_set.iloc[:,1:2]         
+
+# Coverting into 2D array
+real_btc_price = real_btc_price.values      
+
+#getting the predicted BTC value of the first week of Dec 2017  
+inputs = real_btc_price			
+inputs = sc.transform(inputs)
+
+#Reshaping for Keras [reshape into 3 dimensions, [batch_size, timesteps, input_dim]
+inputs = np.reshape(inputs, (8, 1, 1))
+predicted_btc_price = regressor.predict(inputs)
+predicted_btc_price = sc.inverse_transform(predicted_btc_price)
+```
 
 **Output**
-'''
+```
 #Graphs for predicted values
 plt.plot(real_btc_price, color = 'red', label = 'Real BTC Value')
 plt.plot(predicted_btc_price, color = 'blue', label = 'Predicted BTC Value')
@@ -100,7 +124,7 @@ plt.xlabel('Days')
 plt.ylabel('BTC Value')
 plt.legend()
 plt.show()
-'''
+```
 ![pred_output](https://user-images.githubusercontent.com/24585799/34250830-1ff0b65a-e664-11e7-971b-e45a400f98a6.PNG)
 
 ## Reference-
