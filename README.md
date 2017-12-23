@@ -14,6 +14,9 @@ The idea behind RNNs is to make use of sequential information. In a traditional 
 <img src="https://cdn-images-1.medium.com/max/1600/0*x1vmPLhmSow0kzvK.">
 </p
 
+**Intel Nervana** 
+[Small Video Introductory Tutorial by Intel](https://www.youtube.com/watch?v=Y0pqc0RZOsI&t=142s) Do Check this out 
+
 The above diagram shows a RNN being unrolled (or unfolded) into a full network. By unrolling we simply mean that we write out the network for the complete sequence. For example, if the sequence we care about is a sentence of 5 words, the network would be unrolled into a 5-layer neural network.
 
 ## RNN Extensions
@@ -35,9 +38,15 @@ similar to Bidirectional RNNs, only that we now have multiple layers per time st
 </p
 
 **LSTM**
-LSTM networks are quite popular these days and we briefly talked about them above. LSTMs don’t have a fundamentally different architecture from RNNs, but they use a different function to compute the hidden state. The memory in LSTMs are called cells and you can think of them as black boxes that take as input the previous state h_{t-1} and current input x_t. Internally these cells  decide what to keep in (and what to erase from) memory. They then combine the previous state, the current memory, and the input. It turns out that these types of units are very efficient at capturing long-term dependencies
+LSTM networks are quite popular these days and we briefly talked about them above. LSTMs don’t have a fundamentally different architecture from RNNs, but they use a different function to compute the hidden state. The memory in LSTMs are called cells and you can think of them as black boxes that take as input the previous state h_{t-1} and current input x_t. Internally these cells  decide what to keep in (and what to erase from) memory. They then combine the previous state, the current memory, and the input. It turns out that these types of units are very efficient at capturing long-term dependencies.
+The repeating module in an LSTM contains four interacting layers.
 
-please do visit for proper explanation [Link](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
+<p align="center"> 
+<img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-var-GRU.png">
+LSTM Cell
+</p
+
+please do visit for proper explanation [[Link]](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
 
 ## Implementing LSTM
 **Importing Data**
