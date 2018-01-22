@@ -101,6 +101,8 @@ regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
 #Fitting the Recurrent Neural Network [epoches is a kindoff number of iteration]
 regressor.fit(X_train, Y_train, batch_size = 32, epochs = 200)
 ```
+**To prevent Overfitting we can use DropOutLyaer** but it's a naive model so it's not really important.  
+
 **Making Prediction**
 ```
 # Reading CSV file from test set
@@ -134,6 +136,8 @@ plt.ylabel('BTC Value')
 plt.legend()
 plt.show()
 ```
+
+
 ![pred_output](https://user-images.githubusercontent.com/24585799/34250830-1ff0b65a-e664-11e7-971b-e45a400f98a6.PNG)
 
 ## Reference-
