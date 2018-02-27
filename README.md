@@ -37,7 +37,13 @@ similar to Bidirectional RNNs, only that we now have multiple layers per time st
 <img src="http://www.wildml.com/wp-content/uploads/2015/09/Screen-Shot-2015-09-16-at-2.21.51-PM-272x300.png">
 </p
 
-**LSTM**
+**LSTM Cell**
+
+Why LSTM ?
+In a traditional recurrent neural network, `during the gradient back-propagation phase, the gradient signal can end up being multiplied a large number of times (as many as the number of timesteps) by the weight matrix associated with the connections between the neurons of the recurrent hidden layer. This means that, the magnitude of weights in the transition matrix can have a strong impact on the learning process`.
+
+If the weights in this matrix are small (or, more formally, if the leading eigenvalue of the weight matrix is smaller than 1.0), it can lead to a situation called `vanishing gradients` where the gradient signal gets so small that learning either becomes very slow or stops working altogether. It can also make more difficult the task of learning long-term dependencies in the data. Conversely, if the weights in this matrix are large (or, again, more formally, if the leading eigenvalue of the weight matrix is larger than 1.0), it can lead to a situation where the gradient signal is so large that it can cause learning to diverge. This is often referred to as `exploding gradients`.
+
 LSTM networks are quite popular these days and we briefly talked about them above. LSTMs don’t have a fundamentally different architecture from RNNs, but they use a different function to compute the hidden state. The memory in LSTMs are called cells and you can think of them as black boxes that take as input the previous state h_{t-1} and current input x_t. Internally these cells  decide what to keep in (and what to erase from) memory. They then combine the previous state, the current memory, and the input. It turns out that these types of units are very efficient at capturing long-term dependencies.
 The repeating module in an LSTM contains four interacting layers.
 
@@ -50,7 +56,7 @@ please do visit for proper explanation [[Link]](http://colah.github.io/posts/201
 
 ## Implementing LSTM
 **Importing Data**
-```
+```python
 #Importing the Libraries
 import numpy as np
 import matplotlib.pyplot as plt
@@ -69,7 +75,7 @@ training_set = training_set.values
 training_set
 ```
 **Scaling**
-```
+```python
 from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler()
 training_set = sc.fit_transform(training_set)
@@ -80,13 +86,13 @@ X_train = training_set[0:897]
 Y_train = training_set[1:898]
 ```
 **Reshaping for keras**
-```
+```python
 #Reshaping for Keras [reshape into 3 dimensions, [batch_size, timesteps, input_dim]
 X_train = np.reshape(X_train, (897, 1, 1))
 X_train
 ```
 **RNN Layers**
-```
+```python
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
@@ -104,7 +110,7 @@ regressor.fit(X_train, Y_train, batch_size = 32, epochs = 200)
 **To prevent Overfitting we can use DropOutLyaer** but it's a naive model so it's not really important.  
 
 **Making Prediction**
-```
+```python
 # Reading CSV file from test set
 test_set = pd.read_csv('Enter the name of file for testing_set')
 test_set.head()
@@ -126,7 +132,7 @@ predicted_btc_price = sc.inverse_transform(predicted_btc_price)
 ```
 
 **Output**
-```
+```python
 #Graphs for predicted values
 plt.plot(real_btc_price, color = 'red', label = 'Real BTC Value')
 plt.plot(predicted_btc_price, color = 'blue', label = 'Predicted BTC Value')
